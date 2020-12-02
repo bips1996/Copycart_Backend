@@ -128,6 +128,21 @@ module.exports = buildSchema(`
 
           }
 
+
+          type AuthData{
+            userID: ID!
+            token:String!
+            tokenExpiration:Int! 
+          }
+
+
+
+
+
+
+
+
+
           type Queries {
             allCustomer:[Customer!]!
             customerById(id:ID!):[Customer]!
@@ -145,7 +160,10 @@ module.exports = buildSchema(`
             allOrder:[Order!]!
             orderById(id:ID!):[Order!]!
 
-            loginUser:(email:String! , password : String!): authCustomer! 
+            loginUser(email:String!,password:String!):AuthData!
+
+            
+
           },
 
           type Mutations {

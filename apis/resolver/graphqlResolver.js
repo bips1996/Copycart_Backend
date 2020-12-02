@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken') ;
 
 
 const Customer = require('../../models/CustomerSchema');
@@ -418,6 +419,22 @@ module.exports = {
             .catch(err => {
               throw err;
             });
-        }
-      
+        },
+        login: async({email,password})=>
+        {
+            const constumer = Customer.findOne({email:email});
+            if(!constumer)
+            {
+              throw new Error('User not Exist') ;
+            }
+            const isEqual = await bcrypt.compare(password,constumer.password) ;
+            if(!isEqual)
+            {
+              throw new Error('Password is incorrect') ;
+            }
+            const token = jwt.sign({cid : constumer.id , email:constumer.email},'secrekey',{
+              expiresIn : '1h'
+            }) ;
+            return {userID : constumer.ID ,token : token ,tokenExpiration}
+        }  
 };
