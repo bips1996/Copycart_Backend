@@ -27,7 +27,7 @@ app.get('/playground', expressPlayground({ endpoint: '/graphql' }))
   
 
 
-  mongoose.connect("mongodb+srv://Biplaba:bips1996@copycart.vkz7v.mongodb.net/Copycart_beta?retryWrites=true&w=majority",{useNewUrlParser: true,useUnifiedTopology: true,})
+  mongoose.connect("",{useNewUrlParser: true,useUnifiedTopology: true,})
     .then(() => {
         app.listen(3000);
       })
